@@ -1,0 +1,88 @@
+#include <iostream>
+#include <vector>
+
+
+using namespace std;
+
+template <class T>
+class Stack
+{
+vector<T> v;
+public:
+    bool empty();
+    void push(const T &item);
+    T& top();
+    void pop();
+    void print();
+};
+
+template <class T>
+bool Stack<T>::empty()
+{
+    if (v.size()==0)
+        return true;
+    return false;
+}
+
+template <class T>
+void Stack<T>::push(const T& item)
+{
+    v.push_back(item);
+}
+
+template <class T>
+void Stack<T>::pop()
+{
+   if ( !empty() )
+    {
+        cout<<"sterge ultimul element "<<top()<<endl;
+        v.pop_back();
+    }
+else
+   cout<<"stiva vida\n";
+}
+
+template <class T>
+T& Stack<T>::top()
+{
+    if ( v.size()!=0 )
+        return *(v.end()-1);
+}
+
+template <class T>
+void Stack<T>::print()
+{
+    if (!empty())
+    {
+    cout<<"afisarea stivei fara stergerea elementelor: ";
+    typename vector<T>::iterator i;
+    for (i = v.end()-1; i != v.begin()-1; --i)
+        cout << *i << " ";
+    cout<<endl;
+    }
+    else cout<<"stiva vida\n";
+}
+
+int main()
+{
+    Stack<int> s;
+    if (s.empty()==true) cout<<"Stiva vida\n";
+    s.push(10);
+    s.print();
+    cout<<"varful stivei "<<s.top()<<endl<<endl;
+    s.push(20);
+    s.print();
+    cout<<"varful stivei "<<s.top()<<endl<<endl;
+    s.push(30);
+    s.print();
+    cout<<"varful stivei "<<s.top()<<endl<<endl;
+
+    while(!s.empty())
+    {
+    s.pop();
+    s.print();
+    if (!s.empty()) cout<<"varful stivei "<<s.top()<<endl<<endl;
+    }
+
+    return 0;
+}
